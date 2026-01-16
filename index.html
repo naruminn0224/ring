@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRIAM Icon Ring Creator | プレミアムリング作成ツール</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Fabric.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Preview Area -->
+        <main class="preview-area">
+            <div class="canvas-wrapper" id="canvas-container">
+                <canvas id="editor-canvas"></canvas>
+            </div>
+            <div style="margin-top: 1.5rem; color: var(--text-muted); font-size: 0.8rem;">
+                ドラッグで移動 / スクロールまたはハンドルで拡大縮小
+            </div>
+        </main>
+
+        <!-- Controls Sidebar -->
+        <aside class="controls-sidebar">
+            <header>
+                <h1>IRIAM Icon Ring Creator</h1>
+                <p class="subtitle">あなただけのオリジナルリングを数秒で作成</p>
+            </header>
+
+            <!-- Step 1: Upload -->
+            <div class="control-group">
+                <label class="control-label">素材のアップロード</label>
+                <div style="display: flex; gap: 0.5rem;">
+                    <div class="upload-btn-wrapper" style="flex: 1;">
+                        <button class="btn btn-secondary" style="width: 100%;">
+                            <span>画像を選択</span>
+                        </button>
+                        <input type="file" id="image-upload" accept="image/png, image/jpeg">
+                    </div>
+                    <button class="btn btn-outline" id="reset-btn" title="画像を削除" style="padding: 0.75rem;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--border);">
+
+            <!-- Step 2: Ring Processing -->
+            <div class="control-group">
+                <div class="control-label">
+                    <span>リングの太さ</span>
+                    <span class="label-value" id="thickness-val">50%</span>
+                </div>
+                <input type="range" id="ring-thickness" min="10" max="90" value="50">
+            </div>
+
+            <div class="control-group">
+                <div class="control-label">
+                    <span>リングのサイズ (全体)</span>
+                    <span class="label-value" id="size-val">512px</span>
+                </div>
+                <input type="range" id="ring-size" min="256" max="512" value="512">
+            </div>
+
+            <div class="control-group">
+                <div class="control-label">
+                    <span>画像の回転</span>
+                    <span class="label-value" id="rotation-val">0°</span>
+                </div>
+                <input type="range" id="image-rotation" min="0" max="360" value="0">
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--border);">
+
+            <!-- Step 3: Simulation -->
+            <div class="control-group">
+                <label class="control-label">プレビュー設定</label>
+                <button class="btn btn-outline" id="toggle-overlay">
+                    <span>アイコン重ね合わせ：OFF</span>
+                </button>
+            </div>
+
+            <!-- Step 4: Export -->
+            <div style="margin-top: auto; display: flex; flex-direction: column; gap: 0.75rem;">
+                <button class="btn btn-primary" id="download-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    透過PNGを保存する
+                </button>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.75rem;">
+                    形式: 512x512px 透過PNG
+                </p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Main Logic -->
+    <script src="main.js"></script>
+</body>
+
+</html>
